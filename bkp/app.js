@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
   res.end('Hello World\n')
 })
 
-let srcFolder = 'src'
+let srcFolder = 'rename'
 let destFolder = path.join(__dirname, 'final')
 let watchFolder = path.join(__dirname, srcFolder, 'watch')
 

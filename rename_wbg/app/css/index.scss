@@ -1,71 +1,50 @@
 * {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  #container {
-    width: 500px;
-    height: 200px;
-    padding: 30px;
-    margin: 30px auto;
-    box-shadow: 0px 0px 48px 0px rgba(0,0,0,0.31);
-  }
-  
-  form {
-    input {
-      width: 100%;
-      padding: 10px 15px;
-      border: 1px solid #e0e0e0;
-    }
-  }
-  
-  #results {
-    margin-top: 30px;
-  
-    & > p {
-      text-align: center; 
-      color: grey;
-    }
-    
-    a {
-      color:black;
-      text-decoration: none;
-      display: block;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #e0e0e0;
-      transition: box-shadow 200ms ease-in;
-  
-      &:hover {
-        box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.3);
-      }
-  
-      h1 {
-        margin-bottom: 15px;
-        font-size: 16px;
-        margin: 0;
-        text-align: center;
-      }
-  
-      p {
-        margin-bottom: 0;
-      }
-    }
-  }
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
 
-  #rename__title{
-    text-align: center;
-    font-size: 25px;
-  }
+#container {
+  width: 500px;
+  height: 220px;
+  padding: 30px;
+  margin: 30px auto;
+  box-shadow: 0px 0px 48px 0px rgba(0,0,0,0.31);
+}
 
-  #btn-destfile, #btn-createfile{
-    font-size: 25px;
-    padding: 30px, 15px;
-
-    &:hover {
-      box-shadow: 0px 0px 7px 0px rgba(88, 206, 41, 0.3);
-    }
-    &:hover {
-      box-shadow: 0px 0px 7px 0px rgba(88, 206, 41, 0.3);
-    }
+form {
+  #spreadsheet__input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    text-align-last: center;
+    margin: 10px auto;
   }
+}
+
+
+#rename__title{
+  text-align: center;
+  font-size: 25px;
+  color: #006080;
+}
+
+#btn-destfile, #btn-createfile{
+  font-size: 25px;
+  padding: 50px;
+  width: 100%;
+  height: 40px;
+  margin: 10px auto;
+  &:hover {
+    box-shadow: 0px 0px 7px 0px rgba(41, 118, 206, 0.3);
+  }
+  &:active {
+    color: #ffffff;   
+  }
+}
+
+#origin__title, #dest__title {
+  font-size: 12px;
+  color: #3d5c5c;
+  text-align: center;  
+}

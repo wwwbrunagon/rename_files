@@ -7,41 +7,38 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet"> 
   
 </head>
-<body>
+<body>  
+  <h1 id= "rename__title"> Rename Files </h1>   
+  <form class="form" id="form__copyfile">
+    <div id="container">
+      
+      <div>
+        <input  type= "button" id="btn-createfile" value="selecione a pasta de origem">
+        <div id="origin__title">  </div> 
+      </div>
+      
+      <div>        
+        <input type="button" id="btn-destfile" value="selecione a pasta de destino">
+        <div id="dest__title"> </div>        
+      </div>
+      
+      <div>         
+        <input id= "spreadsheet__input" type="text" value=" link planilha"/>        
+        <div id="results"> </div> 
+      </div>   
+      
+    </div>    
+  </form>
+
+  <script>    
+    document.getElementById('form__copyfile').addEventListener('submit', event => {
+      event.preventDefault()      
+    })        
+  </script>
   
-  <h1 id= "rename__title"> Rename Files </h1> 
-
-
-
-  <div id="container">
-      <div>
-          <input  type= "button" id= "btn-createfile" value="selecione a pasta de origem">
-          <div id="origin__title">  </div> 
-      </div>
-    
-      <div>
-        <br>
-        <input type= "button" id= "btn-destfile" value="selecione a pasta de destino">
-        <div id="dest__title"> </div>
-        <br>
-      </div>
-    
-
-
-
-    <div>  
-      <form class = "form" id="form__copyfile">
-        <input id= "spreadsheet__input" type="text" value=" >> Link planilha"/>
-      </form>
-      <div id="results"> </div> 
-    </div>
-    
-  </div>
-
-
   <script src="js/getData.js"></script> 
   
-
+  
 </body>
 </html>
 

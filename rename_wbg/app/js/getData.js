@@ -1,16 +1,14 @@
 const fs = require('fs')
 const {dialog} = require('electron').remote
 const path = require('path')
-const form = document.getElementById("form__copyfile")
-const btn__copy = document.getElementById("btn-createfile")
-const btn__dest= document.getElementById("btn-destfile")
-const spreadsheet__input = document.getElementById('spreadsheet__input')
-const origin__results = document.getElementById('origin__title') 
-const dest__results = document.getElementById('dest__title') 
-
+const form = document.getElementById('form__copyfile')
+const btnCopy = document.getElementById('btn-createfile')
+const btnDest= document.getElementById('btn-destfile')
+const spreadsheetInput = document.getElementById('spreadsheet__input')
+const originResults = document.getElementById('origin__title') 
+const destResults = document.getElementById('dest__title') 
 let srcFolder = null
 let destFolder = null
-
 
 
 function getData(spreadsheetId) {
@@ -18,12 +16,10 @@ function getData(spreadsheetId) {
     const req = new XMLHttpRequest()
     req.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?valueRenderOption=FORMATTED_VALUE&key=AIzaSyCsmkIe9iLWQKSsBFSPmfT53z0rE2csUgY`)
     
-    req.onload = function () {
-      
+    req.onload = function () {      
       if (req.status === 200) {
         resolve(req.response)
-      } else {
-        
+      } else {        
         reject(req.status + ' ' + req.statusText)
       }
     }
@@ -35,17 +31,20 @@ function getData(spreadsheetId) {
 }
 
 
-form.addEventListener("submit", function(event){
+form.addEventListener('submit', function(event){
   event.preventDefault()
-  
-  let spreadsheetId = spreadsheet__input.value
+
+  console.log('btnCopy =   '+ btnCopy.value)
+  console.log(btnDest.value)
+
+  let spreadsheetId = spreadsheetInput.value
   console.log(spreadsheetId)
   
   let matches = /\/([\w-_]{15,})\/(.*?gid=(\d+))?/.exec(spreadsheetId)
-  console.log("Full matches = " + matches)
+  console.log('Full matches = ' + matches)
   
   if (matches !== null) {
-    console.log("valor de spreadsheetId = " + matches[1])            
+    console.log('valor de spreadsheetId = ' + matches[1])            
     
     getData(matches[1])
     .then(result => {
@@ -54,52 +53,75 @@ form.addEventListener("submit", function(event){
       console.log('typeof resultJSON = ' + typeof resultJSON)
       
       
-      for(let ele of resultJSON["values"]) {
-        if (fs.existsSync(path.join(srcFolder,ele[3], ele[1], 'test.png'))){
-          
-          
-          //dificuldade: definir path, criar uma variavel para o path que esta definido como 'test.png' 
+      for(let elem of resultJSON['values']) {        
 
-
-          fs.copyFileSync(path.join(srcFolder,ele[3], ele[1], 'test.png'),path.join(destFolder, ele[4]+ '.png'),function (err) {
-            if (err) throw err;
-            console.log('renamed complete')
-          }) 
-          console.log('ele === ' + ele)
-          console.log('length esta aqui ' + srcFolder.length)
-          
+        let folderBanner = path.join(srcFolder, elem[3], elem[1])
+          if (fs.existsSync(folderBanner)){ 
+          if (!fs.existsSync( path.join(destFolder, elem[3]))){
+            fs.mkdirSync( path.join(destFolder, elem[3]))
+          }
+   
+          let folderBannerDest = path.join(destFolder, elem[3], elem[1])
+          if (!fs.existsSync(folderBannerDest)){
+            fs.mkdirSync(folderBannerDest)
+          }         
+          fs.readdir(folderBanner, (err, files) => {
+            if( err ) {
+              console.error('Could not list the directory.', err )
+              return
+            } 
+            
+            files.forEach((file, index) => {
+              // Make one pass and make the file complete
+              let fromPath = path.join( folderBanner, file )
+              let toPath = path.join( folderBannerDest, elem[4] )
+              
+              fs.stat( fromPath, function( error, stat ) {
+                if( error ) {
+                  console.error( 'Error stating file.', error )
+                  return
+                }
+                
+                if( stat.isFile() && file !== '.DS_Store') { 
+                  fs.copyFileSync(fromPath,toPath,(err) => {
+                    if (err) throw err;
+                    console.log('renamed complete')
+                  }) 
+                  console.log('elem === ' + elem) 
+                }                
+              })
+            })
+          })
         }
       }
     })    
-    spreadsheet__input.value = 'https://docs.google.com/spreadsheets/d/1bGcrVSoPs9d-Qy879E0MieF48xaUC6xv9y-GY7L4T98/edit#gid=0'
+    spreadsheetInput.value = ''
   }
 })
 
 
-
-btn__copy.addEventListener('click', () => {
-  
+btnCopy.addEventListener('click', () => {
   dialog.showOpenDialog({properties: ['openDirectory']},(filenames) => {
     if(filenames === undefined){
       console.log('no files selected')
       return
     }  else {
       srcFolder = filenames[0]
-      origin__results.innerHTML = (filenames[0])
+      originResults.innerHTML = (filenames[0])
     }   
   })
 },false)
 
 
-btn__dest.addEventListener('click', () => {
+btnDest.addEventListener('click', () => {
   dialog.showOpenDialog({properties: ['openDirectory']},(filenames) => {
     if(filenames === undefined){
       console.log('no files selected')
       return
-      
+
     }  else{
       destFolder = filenames[0]
-      dest__results.innerHTML = (filenames[0])
+      destResults.innerHTML = (filenames[0])
     }   
   })
 },false)

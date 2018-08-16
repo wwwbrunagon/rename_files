@@ -4,7 +4,7 @@ app.on('ready', () => {
     console.log('Aplicacao Iniciada')
     let mainWindow = new BrowserWindow({
             width: 550,
-            height: 320
+            height: 350
         })
    mainWindow.loadURL(`file://${__dirname}/app/index.html`)
    console.log(__dirname)

@@ -1,12 +1,14 @@
 const fs = require('fs')
 const {dialog} = require('electron').remote
 const path = require('path')
-const form = document.getElementById('form__copyfile')
 const btnCopy = document.getElementById('btn-createfile')
 const btnDest= document.getElementById('btn-destfile')
 const spreadsheetInput = document.getElementById('spreadsheet__input')
 const originResults = document.getElementById('origin__title') 
 const destResults = document.getElementById('dest__title') 
+const input = document.getElementById('btn-input') 
+const validation = document.getElementById('results') 
+
 let srcFolder = null
 let destFolder = null
 
@@ -31,16 +33,25 @@ function getData(spreadsheetId) {
 }
 
 
-form.addEventListener('submit', (event) => {
+input.addEventListener('click', (event) => {
   event.preventDefault()
   // console.log('btnCopy =   ' + btnCopy.value)
   // console.log('btnDest =   ' + btnDest.value)
+  if (srcFolder == null || destFolder == null){
+    validation.innerHTML = ('Verifique se todas as pastas foram selecionadas corretamente')  
+  } 
 
   let spreadsheetId = spreadsheetInput.value
   console.log('spreadsheetInput.value = ' + spreadsheetId)
   
   let matches = /\/([\w-_]{15,})\/(.*?gid=(\d+))?/.exec(spreadsheetId)
   console.log('Full matches = ' + matches)
+  
+  if (matches == null){
+    validation.innerHTML = ('Verifique se os dados da planilha estão corretos' )
+  }   else{
+    validation.innerHTML = ' '
+  }
   
   if (matches !== null) {
     console.log('valor de spreadsheetId = ' + matches[1])            
@@ -51,26 +62,28 @@ form.addEventListener('submit', (event) => {
       const resultJSON = JSON.parse(result)           
       
       for(let elem of resultJSON['values']) {      
-
+        
         let folderBanner = path.join(srcFolder, elem[0], elem[3], elem[1])
-
+        
+        
         if (fs.existsSync(folderBanner)){ 
-            if (!fs.existsSync( path.join(destFolder, elem[3]))){
-              fs.mkdirSync( path.join(destFolder, elem[3]))
-            }
-    
+          if (!fs.existsSync( path.join(destFolder, elem[3]))){
+            fs.mkdirSync( path.join(destFolder, elem[3]))
+          }
+          
           let folderBannerDest = path.join(destFolder, elem[3], elem[2])
-
-            if (!fs.existsSync(folderBannerDest)){
-              fs.mkdirSync(folderBannerDest)
-            }   
-
+          
+          if (!fs.existsSync(folderBannerDest)){
+            fs.mkdirSync(folderBannerDest)
+            
+          }   
+          
           fs.readdir(folderBanner, (err, files) => {
-              if( err ) {
-                console.error('Could not list the directory.', err )
-                return
-              } 
-              
+            if( err ) {
+              console.error('Could not list the directory.', err )
+              return
+            } 
+            
             files.forEach((file, index) => {
               // Make one pass and make the file complete
               let fromPath = path.join( folderBanner, file )
@@ -79,6 +92,7 @@ form.addEventListener('submit', (event) => {
               fs.stat( fromPath, ( error, stat ) => {
                 if( error ) {
                   console.error( 'Error stating file.', error )
+                  
                   return
                 }
                 
@@ -94,8 +108,7 @@ form.addEventListener('submit', (event) => {
           })
         }
       }
-    })    
-    spreadsheetInput.value = 'copiando arquivos...'
+    })
   }
 })
 
@@ -118,7 +131,7 @@ btnDest.addEventListener('click', () => {
     if(filenames === undefined){
       console.log('no files selected')
       return
-
+      
     }  else{
       destFolder = filenames[0]
       destResults.innerHTML = (filenames[0])

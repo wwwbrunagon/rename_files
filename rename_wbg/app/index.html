@@ -8,35 +8,43 @@
   
 </head>
 <body>  
-  <h1 id= "rename__title"> Rename Files </h1>   
-  <form class="form" id="form__copyfile">
+  <h1 id= "rename__title"> Rename Files </h1>  
+  
+  <form id="form__copyfile">
     <div id="container">
-      
       <div>
-        <input  type= "button" id="btn-createfile" value="selecione a pasta de origem">
+        <a href="#" id="btn-createfile">  Selecione a pasta de origem </a>        
         <div id="origin__title">  </div> 
       </div>
       
-      <div>        
-        <input type="button" id="btn-destfile" value="selecione a pasta de destino">
+      <div> 
+        <a href="#" id="btn-destfile">  Selecione a pasta de destino </a>
         <div id="dest__title"> </div>        
       </div>
       
       <div>         
-        <input id= "spreadsheet__input" type="text" value=" link planilha"/>        
-        <div id="results"> </div> 
+        <input id= "spreadsheet__input" type="text" value=" link planilha"/>
       </div>   
       
-    </div>    
+      <div>         
+        <input id= "folderstructure__input" type="text" value="/~CAMPANHA~/~CRIATIVO~/~VEICULO~/~FORMATO~/~NOMENCLATURA~"/>        
+      </div> 
+      
+      <div>
+        <a href="#" id="btn-input">  Renomear arquivos </a>
+        <div id="results"> </div> 
+      </div>
+      
+    </div>          
   </form>
-
+  
   <script>    
     document.getElementById('form__copyfile').addEventListener('submit', event => {
       event.preventDefault()      
     })        
-  </script>
-  
+    </script>
   <script src="js/getData.js"></script> 
+  
   
   
 </body>

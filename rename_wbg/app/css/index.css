@@ -6,7 +6,6 @@
 
 #container {
   width: 500px;
-  height: 220px;
   padding: 30px;
   margin: 30px auto;
   -webkit-box-shadow: 0px 0px 48px 0px rgba(0, 0, 0, 0.31);
@@ -17,37 +16,67 @@ form #spreadsheet__input {
   width: 100%;
   padding: 10px 15px;
   border: 1px solid #e0e0e0;
-  font-size: 13px;
+  border-radius: 5px;
+  font-size: 12px;
   text-align-last: center;
   margin: 10px auto;
+  color: #3d5c5c;
+}
+
+form #folderstructure__input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 10px;
+  text-align-last: center;
+  margin: 10px auto;
+  color: #004d4d;
 }
 
 #rename__title {
   text-align: center;
   font-size: 25px;
-  color: #006080;
-}
-
-#btn-destfile, #btn-createfile {
-  font-size: 25px;
-  padding: 50px;
-  width: 100%;
-  height: 40px;
-  margin: 10px auto;
-}
-
-#btn-destfile:hover, #btn-createfile:hover {
-  -webkit-box-shadow: 0px 0px 7px 0px rgba(41, 118, 206, 0.3);
-          box-shadow: 0px 0px 7px 0px rgba(41, 118, 206, 0.3);
-}
-
-#btn-destfile:active, #btn-createfile:active {
-  color: #ffffff;
+  color: #003333;
 }
 
 #origin__title, #dest__title {
-  font-size: 12px;
+  font-size: 10px;
   color: #3d5c5c;
   text-align: center;
+}
+
+#results {
+  font-size: 10px;
+  color: #b10a0a;
+  text-align: center;
+  margin-top: -10px;
+}
+
+#btn-input, #btn-destfile, #btn-createfile {
+  display: block;
+  border: 1px solid #94b8b8;
+  color: #1f2e2e;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  padding: 8px;
+  text-decoration: none;
+  list-style-type: none;
+  text-align: center;
+  margin: 20px auto;
+  cursor: pointer;
+  border-radius: 10px;
+  outline: none;
+}
+
+#btn-input:hover, #btn-destfile:hover, #btn-createfile:hover {
+  background-color: #669999;
+  color: #ffffff;
+}
+
+#btn-input:active, #btn-destfile:active, #btn-createfile:active {
+  background-color: #145252;
+  color: #e0e0e0;
 }
 /*# sourceMappingURL=index.css.map */

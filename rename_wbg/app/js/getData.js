@@ -12,18 +12,18 @@ let destFolder = null
 
 
 function getData(spreadsheetId) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     const req = new XMLHttpRequest()
     req.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?valueRenderOption=FORMATTED_VALUE&key=AIzaSyCsmkIe9iLWQKSsBFSPmfT53z0rE2csUgY`)
     
-    req.onload = function () {      
+    req.onload = () => {      
       if (req.status === 200) {
         resolve(req.response)
       } else {        
         reject(req.status + ' ' + req.statusText)
       }
     }
-    req.onerror = function () {
+    req.onerror = () => {
       reject('Erro de conexão')
     }
     req.send()
@@ -31,14 +31,13 @@ function getData(spreadsheetId) {
 }
 
 
-form.addEventListener('submit', function(event){
+form.addEventListener('submit', (event) => {
   event.preventDefault()
-
-  console.log('btnCopy =   '+ btnCopy.value)
-  console.log(btnDest.value)
+  // console.log('btnCopy =   ' + btnCopy.value)
+  // console.log('btnDest =   ' + btnDest.value)
 
   let spreadsheetId = spreadsheetInput.value
-  console.log(spreadsheetId)
+  console.log('spreadsheetInput.value = ' + spreadsheetId)
   
   let matches = /\/([\w-_]{15,})\/(.*?gid=(\d+))?/.exec(spreadsheetId)
   console.log('Full matches = ' + matches)
@@ -49,34 +48,35 @@ form.addEventListener('submit', function(event){
     getData(matches[1])
     .then(result => {
       //console.log('result is working > > >  ' + result)
-      const resultJSON = JSON.parse(result)
-      console.log('typeof resultJSON = ' + typeof resultJSON)
+      const resultJSON = JSON.parse(result)           
       
-      
-      for(let elem of resultJSON['values']) {        
+      for(let elem of resultJSON['values']) {      
 
-        let folderBanner = path.join(srcFolder, elem[3], elem[1])
-          if (fs.existsSync(folderBanner)){ 
-          if (!fs.existsSync( path.join(destFolder, elem[3]))){
-            fs.mkdirSync( path.join(destFolder, elem[3]))
-          }
-   
-          let folderBannerDest = path.join(destFolder, elem[3], elem[1])
-          if (!fs.existsSync(folderBannerDest)){
-            fs.mkdirSync(folderBannerDest)
-          }         
+        let folderBanner = path.join(srcFolder, elem[0], elem[3], elem[1])
+
+        if (fs.existsSync(folderBanner)){ 
+            if (!fs.existsSync( path.join(destFolder, elem[3]))){
+              fs.mkdirSync( path.join(destFolder, elem[3]))
+            }
+    
+          let folderBannerDest = path.join(destFolder, elem[3], elem[2])
+
+            if (!fs.existsSync(folderBannerDest)){
+              fs.mkdirSync(folderBannerDest)
+            }   
+
           fs.readdir(folderBanner, (err, files) => {
-            if( err ) {
-              console.error('Could not list the directory.', err )
-              return
-            } 
-            
+              if( err ) {
+                console.error('Could not list the directory.', err )
+                return
+              } 
+              
             files.forEach((file, index) => {
               // Make one pass and make the file complete
               let fromPath = path.join( folderBanner, file )
               let toPath = path.join( folderBannerDest, elem[4] )
               
-              fs.stat( fromPath, function( error, stat ) {
+              fs.stat( fromPath, ( error, stat ) => {
                 if( error ) {
                   console.error( 'Error stating file.', error )
                   return
@@ -95,7 +95,7 @@ form.addEventListener('submit', function(event){
         }
       }
     })    
-    spreadsheetInput.value = ''
+    spreadsheetInput.value = 'copiando arquivos...'
   }
 })
 

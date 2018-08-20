@@ -27,7 +27,8 @@
       </div>   
       
       <div>         
-        <input id= "folderstructure__input" type="text" value="/~CAMPANHA~/~CRIATIVO~/~VEICULO~/~FORMATO~/~NOMENCLATURA~"/>        
+        <input id= "folderstructure__input" type="text" value="Estrutura das pastas"/> 
+        <p id="folderstructure__txt">/~CAMPANHA~/~CRIATIVO~/~VEICULO~/~FORMATO~/~NOMENCLATURA~</p>       
       </div> 
       
       <div>
@@ -39,8 +40,9 @@
   </form>
   
   <script>    
-    document.getElementById('form__copyfile').addEventListener('submit', event => {
-      event.preventDefault()      
+    document.getElementById('folderstructure__input').addEventListener('submit', event => {
+      event.preventDefault()   
+      console.log('FolderStructure' + folderStrutcture.value)     
     })        
     </script>
   <script src="js/getData.js"></script> 

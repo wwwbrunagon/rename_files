@@ -17,7 +17,7 @@ form #spreadsheet__input {
   padding: 10px 15px;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 10px;
   text-align-last: center;
   margin: 10px auto;
   color: #3d5c5c;
@@ -32,6 +32,7 @@ form #folderstructure__input {
   text-align-last: center;
   margin: 10px auto;
   color: #004d4d;
+  font-size: 10px;
 }
 
 #rename__title {
@@ -40,10 +41,12 @@ form #folderstructure__input {
   color: #003333;
 }
 
-#origin__title, #dest__title {
-  font-size: 10px;
-  color: #3d5c5c;
+#origin__title, #dest__title, #folderstructure__txt {
+  font-size: 9px;
+  color: #4d5a5a;
   text-align: center;
+  text-align: center;
+  margin-top: -4px;
 }
 
 #results {

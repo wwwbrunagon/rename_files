@@ -23,13 +23,14 @@
       </div>
       
       <div>         
-        <input id= "spreadsheet__input" type="text" value=" link planilha"/>
+        <input id= "spreadsheet__input" type="text" value="Link planilha"/>
       </div>   
       
       <div>         
-        <input id= "folderstructure__input" type="text" value="Estrutura das pastas"/> 
-        <p id="folderstructure__txt">/~CAMPANHA~/~CRIATIVO~/~VEICULO~/~FORMATO~/~NOMENCLATURA~</p>       
+        <input id= "folderstructure__input" type="text" value="Estrutura de pastas"/> 
+        <p id="folderstructure__txt">/~CAMPANHA~/~CRIATIVO~/~VEICULO~/~FORMATO~/</p>       
       </div> 
+      
       
       <div>
         <a href="#" id="btn-input">  Renomear arquivos </a>
@@ -43,8 +44,10 @@
     document.getElementById('folderstructure__input').addEventListener('submit', event => {
       event.preventDefault()   
       console.log('FolderStructure' + folderStrutcture.value)     
-    })        
-    </script>
+    })
+  </script>
+  
+  
   <script src="js/getData.js"></script> 
   
   

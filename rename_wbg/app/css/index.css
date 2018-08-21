@@ -49,7 +49,7 @@ form #folderstructure__input {
   margin-top: -4px;
 }
 
-#results {
+#results, #error {
   font-size: 10px;
   color: #b10a0a;
   text-align: center;

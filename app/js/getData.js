@@ -127,10 +127,8 @@ input.addEventListener('click', (event) => {
     console.log(err)
     validation.innerHTML = err.message
   } 
-  if (srcFolder == null || destFolder == null || matches == null){
+  if (srcFolder == null || destFolder == null ){
     validation.innerHTML = ('Verifique se todas as pastas foram selecionadas corretamente')  
-  }  if (matches == null){
-    validation.innerHTML = ('Verifique se a PLANILHA foi preenchida corretamente') 
   } else{
     validation.innerHTML = ('copiando arquivos') 
   }

@@ -49,14 +49,14 @@ form #folderstructure__input {
   margin-top: -4px;
 }
 
-#results, #error {
+#results {
   font-size: 10px;
   color: #b10a0a;
   text-align: center;
   margin-top: -10px;
 }
 
-#btn-input, #btn-destfile, #btn-createfile {
+#btn-input, #btn-destfile, #btn-createfile, #btn__refresh {
   display: block;
   border: 1px solid #94b8b8;
   color: #1f2e2e;
@@ -73,13 +73,18 @@ form #folderstructure__input {
   outline: none;
 }
 
-#btn-input:hover, #btn-destfile:hover, #btn-createfile:hover {
+#btn-input:hover, #btn-destfile:hover, #btn-createfile:hover, #btn__refresh:hover {
   background-color: #669999;
   color: #ffffff;
 }
 
-#btn-input:active, #btn-destfile:active, #btn-createfile:active {
+#btn-input:active, #btn-destfile:active, #btn-createfile:active, #btn__refresh:active {
   background-color: #145252;
   color: #e0e0e0;
+}
+
+#btn__refresh {
+  width: 40%;
+  margin: 30px auto;
 }
 /*# sourceMappingURL=index.css.map */

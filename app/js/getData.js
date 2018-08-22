@@ -15,7 +15,7 @@ let destFolder = null
 function getData(spreadsheetId) {
   return new Promise((resolve, reject) => {
     const req = new XMLHttpRequest()
-    req.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Sheet1?valueRenderOption=FORMATTED_VALUE&key=AIzaSyCsmkIe9iLWQKSsBFSPmfT53z0rE2csUgY`)
+    req.open('GET', `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:Z?valueRenderOption=FORMATTED_VALUE&key=AIzaSyCsmkIe9iLWQKSsBFSPmfT53z0rE2csUgY`)
     
     req.onload = () => {      
       if (req.status === 200) {
@@ -57,10 +57,8 @@ input.addEventListener('click', (event) => {
     folderStrutcture = folderStrutcture.value.replace(/^\//,'').replace(/\/$/,'')
 
     let spreadsheetId = spreadsheetInput.value
-    console.log('spreadsheetInput.value = ' + spreadsheetId)  
 
     let matches = /\/([\w-_]{15,})\/(.*?gid=(\d+))?/.exec(spreadsheetId)
-    console.log('Full matches = ' + matches) 
     
     if (matches == null){
       validation.innerHTML = ('Verifique se a PLANILHA foi preenchida corretamente')
@@ -69,7 +67,6 @@ input.addEventListener('click', (event) => {
     }
     
     if (matches !== null) {
-      console.log('valor de spreadsheetId = ' + matches[1]) 
       
       let counter = 0
       

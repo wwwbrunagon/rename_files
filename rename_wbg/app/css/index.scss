@@ -50,14 +50,14 @@ form {
   margin-top:-4px;
   
 }
-#results, #error{
+#results{
   font-size: 10px;
   color: #b10a0a;
   text-align: center;
   margin-top:-10px;
 }
 
-#btn-input, #btn-destfile, #btn-createfile{
+#btn-input, #btn-destfile, #btn-createfile, #btn__refresh{
   display: block;
   border: 1px solid #94b8b8; 
   color: #1f2e2e;
@@ -81,4 +81,9 @@ form {
     background-color:#145252;
     color: #e0e0e0;
   }
+}
+
+#btn__refresh{
+  width: 40%;
+  margin: 30px auto;
 }

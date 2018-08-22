@@ -72,7 +72,6 @@ input.addEventListener('click', (event) => {
       console.log('valor de spreadsheetId = ' + matches[1]) 
       
       let counter = 0
-
       
       getData(matches[1])
       .then(result => {
@@ -112,18 +111,15 @@ input.addEventListener('click', (event) => {
                 fs.copyFileSync(fromPath,toPath)
                 counter++ 
                 //console.log('elem === ' + elem) 
-              }               
-            
+              }                           
             }})       
           }
         }
-        console.log('Contador == '+ counter, resultJSON['values'].length)
+        console.log('Contador = '+ counter, resultJSON['values'].length)
         if(counter >=1){
-          validation.innerHTML = ('ESSA PASTA Já COPIADA')
+          validation.innerHTML = ('copiando arquivos')
           console.log(counter.message)
-        } else {
-          counter = 0
-          validation.innerHTML = ('copiando pastas')
+          return
         }
       })
     }}
@@ -131,9 +127,14 @@ input.addEventListener('click', (event) => {
     console.log(err)
     validation.innerHTML = err.message
   } 
+  if (srcFolder == null || destFolder == null || matches == null){
+    validation.innerHTML = ('Verifique se todas as pastas foram selecionadas corretamente')  
+  }  if (matches == null){
+    validation.innerHTML = ('Verifique se a PLANILHA foi preenchida corretamente') 
+  } else{
+    validation.innerHTML = ('copiando arquivos') 
+  }
 })
-
-
 
 btnCopy.addEventListener('click', () => {
   dialog.showOpenDialog({properties: ['openDirectory']},(filenames) => {
@@ -146,7 +147,6 @@ btnCopy.addEventListener('click', () => {
     }   
   })
 },false)
-
 
 btnDest.addEventListener('click', () => {
   dialog.showOpenDialog({properties: ['openDirectory']},(filenames) => {

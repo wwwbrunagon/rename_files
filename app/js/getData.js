@@ -85,7 +85,7 @@ input.addEventListener('click', (event) => {
           let veiculo = elem[2]    
           let criativo = elem[3]
           let nomenclatura = elem[4] 
-          let folderBanner = path.join(srcFolder, criativo, formato)
+          let folderBanner = path.join(srcFolder, campanha, criativo, formato)
 
           if (fs.existsSync(folderBanner)){         
             let folderStr = folderStrutcture.replace(/~CAMPANHA~/, campanha).replace(/~FORMATO~/, formato).replace(/~VEICULO~/, veiculo).replace(/~CRIATIVO~/, criativo)
@@ -115,12 +115,7 @@ input.addEventListener('click', (event) => {
             }})       
           }
         }
-        console.log('Contador = '+ counter, resultJSON['values'].length)
-        if(counter >=1){
-          validation.innerHTML = ('copiando arquivos')
-          console.log(counter.message)
-          return
-        }
+        validation.innerHTML = `${counter} arquivos de ${resultJSON['values'].length} foram copiados.`
       })
     }}
   catch(err){
